@@ -1,6 +1,9 @@
 # A Fair Ranking and New Model for Panoptic Scene Graph Generation
 
-This is the official implementation of our paper "A Fair Ranking and New Model for Panoptic Scene Graph Generation", accepted at ECCV 2024. For more information, please visit the [project page](https://lorjul.github.io/fair-psgg/).
+This is the official implementation for these papers:
+
++ "A Fair Ranking and New Model for Panoptic Scene Graph Generation", accepted at ECCV 2024. For more information, please visit the [project page](https://lorjul.github.io/fair-psgg/).
++ "COPA-SG: Dense Scene Graphs with Parametric and Proto-Relations", accepted at SG2RL@ICCV 2025. For more information, please visit the [project page](https://lorjul.github.io/copasg). Additional code will be published soon.
 
 ## Setup
 
@@ -141,7 +144,7 @@ python scripts/evaluate.py \
 
 ## Citation
 
-If you found our paper or code helpful, please consider citing it:
+If you found our papers or code helpful, please consider citing them:
 
 ``` bibtex
 @misc{lorenz2024fairpsgg,
@@ -152,5 +155,15 @@ If you found our paper or code helpful, please consider citing it:
     archivePrefix={arXiv},
     primaryClass={cs.CV},
     url={https://arxiv.org/abs/2407.09216}, 
+}
+
+@misc{lorenz2025copasg,
+      title={CoPa-SG: Dense Scene Graphs with Parametric and Proto-Relations},
+      author={Julian Lorenz and Mrunmai Phatak and Robin Schön and Katja Ludwig and Nico Hörmann and Annemarie Friedrich and Rainer Lienhart},
+      year={2025},
+      eprint={2506.21357},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2506.21357},
 }
 ```
