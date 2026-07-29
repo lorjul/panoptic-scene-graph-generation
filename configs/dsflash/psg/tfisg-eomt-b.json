@@ -1,0 +1,60 @@
+{
+    "description": "EoMT-B backbone, intended to continue from ISG-pretraining.",
+    "loss": {
+        "rel_weight": 0.8,
+        "node_loss_weight": 0.2,
+        "angle_weight": 0.15,
+        "distance_weight": 0.1
+    },
+    "rels_per_batch": 512,
+    "lr": 1e-05,
+    "weight_decay": 0.04,
+    "neg_ratio": 0.2,
+    "ema": 0.995,
+    "augmentations": {
+        "train": [
+            "ToTensor",
+            "ClampBoundingBoxes",
+            "RandomHorizontalFlip",
+            "SquarePad",
+            {
+                "@": "Resize",
+                "size": 640
+            },
+            {
+                "@": "ColorJitter",
+                "brightness": 0.1,
+                "contrast": 0.1,
+                "saturation": 0.1,
+                "hue": 0.1
+            }
+        ],
+        "val": [
+            "ToTensor",
+            "ClampBoundingBoxes",
+            "SquarePad",
+            {
+                "@": "Resize",
+                "size": 640
+            }
+        ]
+    },
+    "extractor": {
+        "type": "eomt",
+        "frozen": true,
+        "num_intermediate": 4,
+        "variant": "base"
+    },
+    "architecture": {
+        "transformer_depth": 4,
+        "embed_dim": 384,
+        "patch_size": 3,
+        "use_semantics": false,
+        "use_masks": true,
+        "bg_ratio_strategy": "sum",
+        "encode_coords": true
+    },
+    "data": {
+        "source": "psg"
+    }
+}

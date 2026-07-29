@@ -50,13 +50,41 @@
         "source": {
           "default": "psg",
           "enum": [
-            "psg",
+            "isg",
             "o365",
+            "psg",
+            "psg-coco",
+            "vg-danfei",
             "vg-ietrans",
-            "psg-coco"
+            "vg-kaihua"
           ],
           "title": "Source",
           "type": "string"
+        },
+        "normals": {
+          "default": false,
+          "title": "Normals",
+          "type": "boolean"
+        },
+        "depth": {
+          "default": false,
+          "title": "Depth",
+          "type": "boolean"
+        },
+        "ignore_nodes": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ignore Nodes"
         }
       },
       "title": "DataCfg",
@@ -67,9 +95,6 @@
         "type": {
           "const": "convnext",
           "default": "convnext",
-          "enum": [
-            "convnext"
-          ],
           "title": "Type",
           "type": "string"
         },
@@ -87,9 +112,6 @@
         "type": {
           "const": "dinov2",
           "default": "dinov2",
-          "enum": [
-            "dinov2"
-          ],
           "title": "Type",
           "type": "string"
         },
@@ -103,9 +125,156 @@
           ],
           "title": "Variant",
           "type": "string"
+        },
+        "num_intermediate": {
+          "default": 4,
+          "title": "Num Intermediate",
+          "type": "integer"
+        },
+        "frozen": {
+          "default": true,
+          "title": "Frozen",
+          "type": "boolean"
         }
       },
       "title": "ExtractorCfg_Dinov2",
+      "type": "object"
+    },
+    "ExtractorCfg_Dinov2Single": {
+      "properties": {
+        "type": {
+          "const": "dinov2_single",
+          "default": "dinov2_single",
+          "title": "Type",
+          "type": "string"
+        },
+        "variant": {
+          "default": "s",
+          "enum": [
+            "s",
+            "b",
+            "l",
+            "g"
+          ],
+          "title": "Variant",
+          "type": "string"
+        },
+        "layer_idx": {
+          "default": 4,
+          "title": "Layer Idx",
+          "type": "integer"
+        },
+        "frozen": {
+          "default": true,
+          "title": "Frozen",
+          "type": "boolean"
+        }
+      },
+      "title": "ExtractorCfg_Dinov2Single",
+      "type": "object"
+    },
+    "ExtractorCfg_Dinov3": {
+      "properties": {
+        "type": {
+          "const": "dinov3",
+          "default": "dinov3",
+          "title": "Type",
+          "type": "string"
+        },
+        "variant": {
+          "default": "vits16",
+          "enum": [
+            "vits16",
+            "vitb16",
+            "vitl16"
+          ],
+          "title": "Variant",
+          "type": "string"
+        },
+        "frozen": {
+          "default": true,
+          "title": "Frozen",
+          "type": "boolean"
+        },
+        "multi_layers": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Multi Layers"
+        }
+      },
+      "title": "ExtractorCfg_Dinov3",
+      "type": "object"
+    },
+    "ExtractorCfg_EoMT": {
+      "properties": {
+        "type": {
+          "const": "eomt",
+          "default": "eomt",
+          "title": "Type",
+          "type": "string"
+        },
+        "variant": {
+          "default": "base",
+          "enum": [
+            "small",
+            "base",
+            "large",
+            "giant"
+          ],
+          "title": "Variant",
+          "type": "string"
+        },
+        "img_size": {
+          "default": 640,
+          "title": "Img Size",
+          "type": "integer"
+        },
+        "num_intermediate": {
+          "default": 4,
+          "title": "Num Intermediate",
+          "type": "integer"
+        },
+        "frozen": {
+          "default": true,
+          "title": "Frozen",
+          "type": "boolean"
+        }
+      },
+      "title": "ExtractorCfg_EoMT",
+      "type": "object"
+    },
+    "ExtractorCfg_EomtHf": {
+      "properties": {
+        "type": {
+          "const": "eomt-hf",
+          "default": "eomt-hf",
+          "title": "Type",
+          "type": "string"
+        },
+        "model_id": {
+          "default": "tue-mps/coco_panoptic_eomt_base_640_2x",
+          "title": "Model Id",
+          "type": "string"
+        },
+        "frozen": {
+          "default": true,
+          "title": "Frozen",
+          "type": "boolean"
+        },
+        "num_intermediate": {
+          "default": 4,
+          "title": "Num Intermediate",
+          "type": "integer"
+        }
+      },
+      "title": "ExtractorCfg_EomtHf",
       "type": "object"
     },
     "ExtractorCfg_FasterRCNN": {
@@ -113,9 +282,6 @@
         "type": {
           "const": "fasterrcnn",
           "default": "fasterrcnn",
-          "enum": [
-            "fasterrcnn"
-          ],
           "title": "Type",
           "type": "string"
         },
@@ -139,6 +305,11 @@
           ],
           "title": "Backbone",
           "type": "string"
+        },
+        "frozen": {
+          "default": false,
+          "title": "Frozen",
+          "type": "boolean"
         }
       },
       "title": "ExtractorCfg_FasterRCNN",
@@ -149,18 +320,12 @@
         "type": {
           "const": "hrnet",
           "default": "hrnet",
-          "enum": [
-            "hrnet"
-          ],
           "title": "Type",
           "type": "string"
         },
         "variant": {
           "const": "w32",
           "default": "w32",
-          "enum": [
-            "w32"
-          ],
           "title": "Variant",
           "type": "string"
         }
@@ -173,9 +338,6 @@
         "type": {
           "const": "mask2former",
           "default": "mask2former",
-          "enum": [
-            "mask2former"
-          ],
           "title": "Type",
           "type": "string"
         },
@@ -198,14 +360,38 @@
       "title": "ExtractorCfg_Mask2Former",
       "type": "object"
     },
+    "ExtractorCfg_Radio": {
+      "properties": {
+        "type": {
+          "const": "radio",
+          "default": "radio",
+          "title": "Type",
+          "type": "string"
+        },
+        "variant": {
+          "default": "c-radio_v3-b",
+          "enum": [
+            "c-radio_v3-b",
+            "c-radio_v3-l",
+            "e-radio_v2"
+          ],
+          "title": "Variant",
+          "type": "string"
+        },
+        "frozen": {
+          "default": true,
+          "title": "Frozen",
+          "type": "boolean"
+        }
+      },
+      "title": "ExtractorCfg_Radio",
+      "type": "object"
+    },
     "ExtractorCfg_ResNet": {
       "properties": {
         "type": {
           "const": "resnet",
           "default": "resnet",
-          "enum": [
-            "resnet"
-          ],
           "title": "Type",
           "type": "string"
         },
@@ -223,9 +409,6 @@
         "type": {
           "const": "step",
           "default": "step",
-          "enum": [
-            "step"
-          ],
           "title": "Type",
           "type": "string"
         },
@@ -241,6 +424,63 @@
         }
       },
       "title": "LRScheduleStep",
+      "type": "object"
+    },
+    "LossCfg": {
+      "properties": {
+        "rel_weight": {
+          "default": 0.8,
+          "title": "Rel Weight",
+          "type": "number"
+        },
+        "node_loss_weight": {
+          "default": 0.2,
+          "title": "Node Loss Weight",
+          "type": "number"
+        },
+        "angle_weight": {
+          "default": 0.0,
+          "title": "Angle Weight",
+          "type": "number"
+        },
+        "distance_weight": {
+          "default": 0.0,
+          "title": "Distance Weight",
+          "type": "number"
+        },
+        "legacy_balancing": {
+          "default": false,
+          "title": "Legacy Balancing",
+          "type": "boolean"
+        }
+      },
+      "title": "LossCfg",
+      "type": "object"
+    },
+    "RelTreshCfg": {
+      "properties": {
+        "min_ign_angle_deg": {
+          "default": 10,
+          "title": "Min Ign Angle Deg",
+          "type": "number"
+        },
+        "max_ign_angle_deg": {
+          "default": 20,
+          "title": "Max Ign Angle Deg",
+          "type": "number"
+        },
+        "min_ign_distance_m": {
+          "default": 1.0,
+          "title": "Min Ign Distance M",
+          "type": "number"
+        },
+        "max_ign_distance_m": {
+          "default": 1.2,
+          "title": "Max Ign Distance M",
+          "type": "number"
+        }
+      },
+      "title": "RelTreshCfg",
       "type": "object"
     },
     "_Augmentations": {
@@ -283,20 +523,33 @@
     }
   },
   "properties": {
-    "rel_weight": {
-      "default": 0.8,
-      "title": "Rel Weight",
-      "type": "number"
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Description is just to document the used configuration. It will not change the behaviour of the code.",
+      "title": "Description"
     },
-    "node_loss_weight": {
-      "default": 0.2,
-      "title": "Node Loss Weight",
-      "type": "number"
+    "loss": {
+      "$ref": "#/$defs/LossCfg",
+      "default": {
+        "rel_weight": 0.8,
+        "node_loss_weight": 0.2,
+        "angle_weight": 0.0,
+        "distance_weight": 0.0,
+        "legacy_balancing": false
+      }
     },
-    "batch_size": {
-      "default": 32,
-      "title": "Batch Size",
-      "type": "integer"
+    "ignore_norel_predicates": {
+      "default": false,
+      "title": "Ignore Norel Predicates",
+      "type": "boolean"
     },
     "rels_per_batch": {
       "default": 4096,
@@ -318,6 +571,7 @@
         }
       ],
       "default": null,
+      "description": "Set to None to use same lr as config.lr",
       "title": "Lr Backbone"
     },
     "lr_schedule": {
@@ -330,6 +584,18 @@
         }
       ],
       "default": null
+    },
+    "grad_clipping": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grad Clipping"
     },
     "weight_decay": {
       "default": 0.01,
@@ -357,38 +623,88 @@
       "title": "Grad Accumulate",
       "type": "integer"
     },
+    "ema": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "If set to a float value, also train an EMA-model with the provided factor. Usually set to 0.995 or higher.",
+      "title": "Ema"
+    },
+    "rel_thresholds": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RelTreshCfg"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": {
+        "min_ign_angle_deg": 10.0,
+        "max_ign_angle_deg": 20.0,
+        "min_ign_distance_m": 1.0,
+        "max_ign_distance_m": 1.2
+      }
+    },
     "extractor": {
       "default": {
         "type": "fasterrcnn",
         "stage": "0",
-        "backbone": "resnet50"
+        "backbone": "resnet50",
+        "frozen": false
       },
       "discriminator": {
         "mapping": {
           "convnext": "#/$defs/ExtractorCfg_ConvNeXt",
           "dinov2": "#/$defs/ExtractorCfg_Dinov2",
+          "dinov2_single": "#/$defs/ExtractorCfg_Dinov2Single",
+          "dinov3": "#/$defs/ExtractorCfg_Dinov3",
+          "eomt": "#/$defs/ExtractorCfg_EoMT",
+          "eomt-hf": "#/$defs/ExtractorCfg_EomtHf",
           "fasterrcnn": "#/$defs/ExtractorCfg_FasterRCNN",
           "hrnet": "#/$defs/ExtractorCfg_HRNet",
           "mask2former": "#/$defs/ExtractorCfg_Mask2Former",
+          "radio": "#/$defs/ExtractorCfg_Radio",
           "resnet": "#/$defs/ExtractorCfg_ResNet"
         },
         "propertyName": "type"
       },
       "oneOf": [
         {
-          "$ref": "#/$defs/ExtractorCfg_FasterRCNN"
-        },
-        {
-          "$ref": "#/$defs/ExtractorCfg_Mask2Former"
+          "$ref": "#/$defs/ExtractorCfg_ConvNeXt"
         },
         {
           "$ref": "#/$defs/ExtractorCfg_Dinov2"
         },
         {
+          "$ref": "#/$defs/ExtractorCfg_Dinov2Single"
+        },
+        {
+          "$ref": "#/$defs/ExtractorCfg_Dinov3"
+        },
+        {
+          "$ref": "#/$defs/ExtractorCfg_EoMT"
+        },
+        {
+          "$ref": "#/$defs/ExtractorCfg_EomtHf"
+        },
+        {
+          "$ref": "#/$defs/ExtractorCfg_FasterRCNN"
+        },
+        {
           "$ref": "#/$defs/ExtractorCfg_HRNet"
         },
         {
-          "$ref": "#/$defs/ExtractorCfg_ConvNeXt"
+          "$ref": "#/$defs/ExtractorCfg_Mask2Former"
+        },
+        {
+          "$ref": "#/$defs/ExtractorCfg_Radio"
         },
         {
           "$ref": "#/$defs/ExtractorCfg_ResNet"
@@ -397,11 +713,7 @@
       "title": "Extractor"
     },
     "architecture": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/ArchCfg_DaniFormer"
-        }
-      ],
+      "$ref": "#/$defs/ArchCfg_DaniFormer",
       "default": {
         "transformer_depth": 6,
         "embed_dim": 384,
@@ -412,14 +724,19 @@
         "encode_coords": false
       }
     },
+    "compile": {
+      "default": false,
+      "description": "Whether to use torch.compile on the model.",
+      "title": "Compile",
+      "type": "boolean"
+    },
     "data": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/DataCfg"
-        }
-      ],
+      "$ref": "#/$defs/DataCfg",
       "default": {
-        "source": "psg"
+        "source": "psg",
+        "normals": false,
+        "depth": false,
+        "ignore_nodes": null
       }
     }
   },

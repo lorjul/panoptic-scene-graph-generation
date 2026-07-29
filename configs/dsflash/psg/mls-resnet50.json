@@ -1,0 +1,27 @@
+{
+    "rel_weight": 0.82,
+    "node_loss_weight": 0.18,
+    "batch_size": 32,
+    "rels_per_batch": 128,
+    "lr": 3.73e-05,
+    "weight_decay": 0.04,
+    "neg_ratio": 1.0,
+    "ema": 0.995,
+    "augmentations": null,
+    "extractor": {
+        "type": "fasterrcnn",
+        "stage": "0"
+    },
+    "architecture": {
+        "transformer_depth": 6,
+        "embed_dim": 384,
+        "patch_size": 8,
+        "use_semantics": true,
+        "use_masks": true,
+        "bg_ratio_strategy": "sum",
+        "encode_coords": true
+    },
+    "data": {
+        "source": "psg"
+    }
+}

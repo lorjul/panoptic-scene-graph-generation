@@ -1,22 +1,51 @@
 [project]
-name = "fair-psgg"
+name = "multilabel-baseline"
 version = "1.0.0"
-description = "Official implementation of our paper 'A Fair Ranking and New Model for Panoptic Scene Graph Generation', accepted at ECCV 2024"
-authors = [{name = "Julian Lorenz", email = "julian.lorenz@uni-a.de"}]
-license = "MIT"
+description = ""
+authors = [{name="Julian Lorenz", email="julian.lorenz@uni-a.de"}]
+license = {file="LICENSE"}
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = "==3.10.*"
 dependencies = [
-    "h5py>=3.15.1",
-    "numpy>=2.3.4",
-    "pandas>=2.3.3",
-    "pillow>=12.0.0",
-    "pydantic>=2.12.4",
-    "scikit-learn>=1.7.2",
-    "tensorboard>=2.20.0",
-    "timm>=1.0.22",
-    "torch>=2.9.0",
-    "torchvision>=0.24.0",
-    "tqdm>=4.67.1",
-    "transformers>=4.57.2",
+    "accelerate>=1.10.1",
+    "einops>=0.8.1",
+    "h5py>=3.12.1",
+    "lets-plot>=4.5.1",
+    "matplotlib>=3.9.2",
+    "opencv-python>=4.11.0.86",
+    "optuna>=4.1.0",
+    "pandas>=2.2.3",
+    "panopticapi",
+    "pydantic>=2.10.1",
+    "pymysql>=1.1.1",
+    "scikit-learn>=1.5.2",
+    "seaborn>=0.13.2",
+    "streamlit>=1.43.2",
+    "submitit>=1.5.2",
+    "tensorboard>=2.18.0",
+    "timm>=1.0.11",
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    "tqdm>=4.67.0",
+    "transformers>=4.56.1",
 ]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "ipywidgets>=8.1.5",
+    "pytest>=8.3.3",
+    "streamlit-image-coordinates>=0.2.0",
+]
+onnx = [
+    "onnx>=1.17.0",
+    "onnxruntime>=1.21.0",
+    "onnxscript>=0.2.2",
+]
+sgbench = [
+    "imagecodecs>=2025.3.30",
+    "tifffile>=2025.5.10",
+]
+
+[tool.uv.sources]
+panopticapi = { git = "https://github.com/cocodataset/panopticapi.git", rev = "7bb4655548f98f3fedc07bf37e9040a992b054b0" }
