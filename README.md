@@ -1,6 +1,9 @@
 # A Fair Ranking and New Model for Panoptic Scene Graph Generation
 
-This is the official implementation of our paper "A Fair Ranking and New Model for Panoptic Scene Graph Generation", accepted at ECCV 2024. For more information, please visit the [project page](https://lorjul.github.io/fair-psgg/).
+This is the official implementation of our papers
+
+- "DSFlash: Comprehensive Panoptic Scene Graph Generation in Realtime", accepted at CVPR 2026. For more information, please visit the [project page](https://lorjul.github.io/dsflash/).
+- "A Fair Ranking and New Model for Panoptic Scene Graph Generation", accepted at ECCV 2024. For more information, please visit the [project page](https://lorjul.github.io/fair-psgg/).
 
 ## Setup
 
